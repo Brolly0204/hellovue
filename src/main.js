@@ -11,19 +11,31 @@ Vue.use(VueX);
 //测试vueX的功能
 const store = new VueX.Store({
     state: {
-        count: 0
+        count: 20,
+        todos: [
+            { id: 1, text: '...', done: true },
+            { id: 2, text: '...', done: false }
+        ]
+    },
+    getters: {
+        doneTodos: state => {
+            return state.todos.filter(todo => todo.done)
+        }
     },
     mutations: {
-        increment (state) {
-            state.count++
+        increment (state, payload) {
+            state.count += payload.amount;
         },
         decrement (state) {
             state.count--
         }
     }
 });
-store.commit('increment')
-store.commit('decrement')
+console.log(store.getters.doneTodos);
+store.commit({
+    type:'increment',
+    amount:10
+});
 console.log(store.state.count); // -> 1
 //测试vueX-end
 //1、定义组件，也可以从别的文件导入
@@ -53,6 +65,7 @@ const router = new VueRouter({
 
 new Vue({
     // el: '#app',
+    store,
     router: router,
     render: h => h(App)
 }).$mount('#app');
