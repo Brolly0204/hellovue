@@ -1,6 +1,6 @@
 # myvuex
 
-> A Vue.js project
+> 自己学习VUE.js的入门教程，里面包含了vue.js vue-router,vuex,VueResources等相关的demo
 
 ## Build Setup
 
